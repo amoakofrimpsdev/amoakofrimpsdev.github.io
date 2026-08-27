@@ -4,7 +4,7 @@ export const site = {
   location: "Los Angeles, CA",
   email: "amoakofrimps@gmail.com",
   phone: "(323) 791-5522",
-  github: "https://github.com/Daniel-Frimpong-tech",
+  github: "https://github.com/amoakofrimpsdev",
   linkedin: "https://www.linkedin.com/in/danielfrimps/",
   instagram: "https://www.instagram.com/bits.by.anda/",
   url: "https://amoakofrimpsdev.github.io",
