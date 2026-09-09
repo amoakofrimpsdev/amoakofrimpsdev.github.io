@@ -37,7 +37,7 @@ export default function Home() {
 
           <Reveal delay={0.1} className="space-y-5 self-end text-[15px] leading-relaxed text-paper-dim">
             <p>
-              Right now I am finishing an MS in Computer Science at USC and interning at
+              I recently completed an MS in Computer Science at USC, and I am interning at
               Easley-Dunn Productions, where I maintain a production C# game codebase,
               run the pull request pipeline, and write the unit tests that go with it.
             </p>
@@ -45,8 +45,8 @@ export default function Home() {
               Before that I spent four years at Cadi Media as a part-time co-op
               developer, building client applications on React and Angular with Node and
               Express behind them. The one I am still attached to is a parent portal that
-              let families check their children&apos;s grades online and put two schools&apos;
-              paper report cards out of a job.
+              let families check their children&apos;s grades online, used by roughly 350 parents
+              across two schools in its first year.
             </p>
             <Link
               href="/about/"
@@ -180,7 +180,7 @@ export default function Home() {
             I&apos;m looking for a software engineering role.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-paper-dim">
-            I graduate in May 2026. Based in Los Angeles, happy to work remote or
+            I finished my MS at USC in May 2026. Based in Los Angeles, happy to work remote or
             relocate. Also open to STEM education work and anything that sits between
             the two.
           </p>

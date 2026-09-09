@@ -9,7 +9,7 @@ export const site = {
   instagram: "https://www.instagram.com/bits.by.anda/",
   url: "https://amoakofrimpsdev.github.io",
   tagline:
-    "I build web applications end to end. React and TypeScript on the front, Node and Express behind it. Finishing an MS in Computer Science at USC in May 2026.",
+    "I build web applications end to end. React and TypeScript on the front, Node and Express behind it. MS in Computer Science from USC, completed May 2026.",
   roles: [
     "Full Stack Engineer",
     "React + TypeScript",
@@ -70,7 +70,7 @@ export const experience: Experience[] = [
     place: "Remote",
     points: [
       "Built and deployed client web applications end to end on MERN (React) and MEAN (Angular) stacks, cutting average page load times by 30 to 40 percent.",
-      "Shipped a secure parent portal with a React front end, Node and Express behind it, JWT authentication and SSL, taking it from requirements through production launch. It reached 350+ parents across two schools in the first year and replaced their paper report cards.",
+      "Shipped a secure parent portal with a React front end, Node and Express behind it, JWT authentication and SSL, taking it from requirements through production launch. It was used by roughly 350 parents across two schools in its first year, moving grade reporting online.",
       "Engineered RESTful APIs in Node and Express against both SQL and NoSQL databases.",
       "Designed ETL pipelines in Node against NoSQL stores to keep data consistent across concurrent client applications.",
       "Worked directly with clients and non-technical staff to triage issues and ship fixes on a regular cadence.",

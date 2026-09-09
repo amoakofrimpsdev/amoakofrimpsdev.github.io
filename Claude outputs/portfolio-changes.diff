@@ -1,0 +1,156 @@
+diff --git a/src/app/about/page.tsx b/src/app/about/page.tsx
+index 2b77322..7c132c4 100644
+--- a/src/app/about/page.tsx
++++ b/src/app/about/page.tsx
+@@ -14,7 +14,7 @@ export const metadata: Metadata = {
+ };
+ 
+ const facts = [
+-  { label: "Currently", value: "MS Computer Science, USC. Graduating May 2026." },
++  { label: "Education", value: "MS Computer Science, USC. Completed May 2026." },
+   { label: "Based in", value: "Los Angeles, California" },
+   { label: "Undergrad", value: "BSc Information Technology, GCTU. First Class Honours." },
+   { label: "From", value: "Accra, Ghana" },
+@@ -36,7 +36,7 @@ export default function AboutPage() {
+         <div className="grid gap-14 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
+           <Reveal className="space-y-5 text-[16px] leading-relaxed text-paper-dim">
+             <p>
+-              I am finishing a Master&apos;s in Computer Science at USC. Before that I
++              I recently completed a Master&apos;s in Computer Science at USC. Before that I
+               studied Information Technology at Ghana Communication Technology
+               University in Accra and graduated with First Class Honours.
+             </p>
+diff --git a/src/app/page.tsx b/src/app/page.tsx
+index b329d88..154cb20 100644
+--- a/src/app/page.tsx
++++ b/src/app/page.tsx
+@@ -37,7 +37,7 @@ export default function Home() {
+ 
+           <Reveal delay={0.1} className="space-y-5 self-end text-[15px] leading-relaxed text-paper-dim">
+             <p>
+-              Right now I am finishing an MS in Computer Science at USC and interning at
++              I recently completed an MS in Computer Science at USC, and I am interning at
+               Easley-Dunn Productions, where I maintain a production C# game codebase,
+               run the pull request pipeline, and write the unit tests that go with it.
+             </p>
+@@ -45,8 +45,8 @@ export default function Home() {
+               Before that I spent four years at Cadi Media as a part-time co-op
+               developer, building client applications on React and Angular with Node and
+               Express behind them. The one I am still attached to is a parent portal that
+-              let families check their children&apos;s grades online and put two schools&apos;
+-              paper report cards out of a job.
++              let families check their children&apos;s grades online, used by roughly 350 parents
++              across two schools in its first year.
+             </p>
+             <Link
+               href="/about/"
+@@ -180,7 +180,7 @@ export default function Home() {
+             I&apos;m looking for a software engineering role.
+           </h2>
+           <p className="mx-auto mt-6 max-w-xl text-lg text-paper-dim">
+-            I graduate in May 2026. Based in Los Angeles, happy to work remote or
++            I finished my MS at USC in May 2026. Based in Los Angeles, happy to work remote or
+             relocate. Also open to STEM education work and anything that sits between
+             the two.
+           </p>
+diff --git a/src/components/CountUp.tsx b/src/components/CountUp.tsx
+index e8171e1..af958ff 100644
+--- a/src/components/CountUp.tsx
++++ b/src/components/CountUp.tsx
+@@ -17,10 +17,34 @@ export default function CountUp({
+   const ref = useRef<HTMLSpanElement>(null);
+   const inView = useInView(ref, { once: true, margin: "-60px" });
+   const reduced = useReducedMotion();
+-  const [display, setDisplay] = useState(0);
+ 
++  // The final figure is the default, not zero. That way the server render, a
++  // crawler, a reader with JavaScript off, and any case where the animation
++  // never starts all show the real number instead of a 0.
++  const [display, setDisplay] = useState(value);
++  const [armed, setArmed] = useState(false);
++  const settled = useRef(false);
++
++  // Only drop to zero once we are on the client and can count back up.
+   useEffect(() => {
+-    if (!inView || reduced) return;
++    if (reduced || settled.current) return;
++    setDisplay(0);
++    setArmed(true);
++
++    // Safety net: if the element never registers as in view, stop waiting and
++    // show the number rather than leaving a zero on the page.
++    const bail = window.setTimeout(() => {
++      if (!settled.current) {
++        settled.current = true;
++        setDisplay(value);
++      }
++    }, 2500);
++    return () => window.clearTimeout(bail);
++  }, [reduced, value]);
++
++  useEffect(() => {
++    if (!armed || !inView || reduced || settled.current) return;
++    settled.current = true;
+ 
+     let raf = 0;
+     const start = performance.now();
+@@ -28,19 +52,16 @@ export default function CountUp({
+       const t = Math.min((now - start) / duration, 1);
+       // ease-out-expo, so the number lands softly instead of stopping dead
+       const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+-      setDisplay(value * eased);
++      setDisplay(t === 1 ? value : value * eased);
+       if (t < 1) raf = requestAnimationFrame(tick);
+     };
+     raf = requestAnimationFrame(tick);
+     return () => cancelAnimationFrame(raf);
+-  }, [inView, reduced, value, duration]);
+-
+-  // With reduced motion the final figure is shown outright.
+-  const shown = reduced ? value : display;
++  }, [armed, inView, reduced, value, duration]);
+ 
+   return (
+     <span ref={ref} className="tabular-nums">
+-      {shown.toFixed(decimals)}
++      {display.toFixed(decimals)}
+       {suffix}
+     </span>
+   );
+diff --git a/src/components/Footer.tsx b/src/components/Footer.tsx
+index 4a83b34..a4984fa 100644
+--- a/src/components/Footer.tsx
++++ b/src/components/Footer.tsx
+@@ -10,8 +10,8 @@ export default function Footer() {
+           <div className="max-w-sm">
+             <div className="font-display text-2xl">{site.name}</div>
+             <p className="mt-3 text-sm text-muted">
+-              Software engineer in {site.location}. Graduating May 2026 and looking
+-              for full-time work.
++              Software engineer in {site.location}. MS in Computer Science from USC,
++              looking for full-time work.
+             </p>
+             <div className="mt-6 flex items-center gap-3">
+               <a
+diff --git a/src/lib/content.ts b/src/lib/content.ts
+index 11ea7c4..49e857b 100644
+--- a/src/lib/content.ts
++++ b/src/lib/content.ts
+@@ -9,7 +9,7 @@ export const site = {
+   instagram: "https://www.instagram.com/bits.by.anda/",
+   url: "https://amoakofrimpsdev.github.io",
+   tagline:
+-    "I build web applications end to end. React and TypeScript on the front, Node and Express behind it. Finishing an MS in Computer Science at USC in May 2026.",
++    "I build web applications end to end. React and TypeScript on the front, Node and Express behind it. MS in Computer Science from USC, completed May 2026.",
+   roles: [
+     "Full Stack Engineer",
+     "React + TypeScript",
+@@ -70,7 +70,7 @@ export const experience: Experience[] = [
+     place: "Remote",
+     points: [
+       "Built and deployed client web applications end to end on MERN (React) and MEAN (Angular) stacks, cutting average page load times by 30 to 40 percent.",
+-      "Shipped a secure parent portal with a React front end, Node and Express behind it, JWT authentication and SSL, taking it from requirements through production launch. It reached 350+ parents across two schools in the first year and replaced their paper report cards.",
++      "Shipped a secure parent portal with a React front end, Node and Express behind it, JWT authentication and SSL, taking it from requirements through production launch. It was used by roughly 350 parents across two schools in its first year, moving grade reporting online.",
+       "Engineered RESTful APIs in Node and Express against both SQL and NoSQL databases.",
+       "Designed ETL pipelines in Node against NoSQL stores to keep data consistent across concurrent client applications.",
+       "Worked directly with clients and non-technical staff to triage issues and ship fixes on a regular cadence.",

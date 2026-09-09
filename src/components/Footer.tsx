@@ -10,8 +10,8 @@ export default function Footer() {
           <div className="max-w-sm">
             <div className="font-display text-2xl">{site.name}</div>
             <p className="mt-3 text-sm text-muted">
-              Software engineer in {site.location}. Graduating May 2026 and looking
-              for full-time work.
+              Software engineer in {site.location}. MS in Computer Science from USC,
+              looking for full-time work.
             </p>
             <div className="mt-6 flex items-center gap-3">
               <a

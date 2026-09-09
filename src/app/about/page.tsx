@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 const facts = [
-  { label: "Currently", value: "MS Computer Science, USC. Graduating May 2026." },
+  { label: "Education", value: "MS Computer Science, USC. Completed May 2026." },
   { label: "Based in", value: "Los Angeles, California" },
   { label: "Undergrad", value: "BSc Information Technology, GCTU. First Class Honours." },
   { label: "From", value: "Accra, Ghana" },
@@ -36,7 +36,7 @@ export default function AboutPage() {
         <div className="grid gap-14 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
           <Reveal className="space-y-5 text-[16px] leading-relaxed text-paper-dim">
             <p>
-              I am finishing a Master&apos;s in Computer Science at USC. Before that I
+              I recently completed a Master&apos;s in Computer Science at USC. Before that I
               studied Information Technology at Ghana Communication Technology
               University in Accra and graduated with First Class Honours.
             </p>
