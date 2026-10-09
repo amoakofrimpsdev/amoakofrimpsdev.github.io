@@ -1,152 +1,281 @@
 @import "tailwindcss";
 
-@theme {
-  /* Graphite base. Almost neutral, a hair warm so it doesn't read blue. */
-  --color-ink: #0A0A0B;
-  --color-ink-2: #0F0F11;
-  --color-panel: #151517;
-  --color-panel-2: #1C1C1F;
-  --color-line: #232327;
-  --color-line-2: #34343A;
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-  --color-paper: #FAFAF9;
-  --color-paper-dim: #A9A9AF;
-  --color-muted: #71717A;
+/* ---------------------------------------------------------------
+   Tokens. Light is the default; dark is opt-in through data-theme,
+   which an inline script in the root layout sets before first paint.
+   --------------------------------------------------------------- */
+:root {
+  --bg: #f5f3ee;
+  --surface: #fbfaf7;
+  --sunken: #ece9e1;
+  --ink: #16150f;
+  --ink-2: #47453c;
+  --ink-3: #6b685d;
+  --line: #dedad0;
+  --line-2: #c6c1b3;
+  --accent: #e8431a;
+  --accent-ink: #b5330f;
+  --accent-wash: #e8431a14;
+  color-scheme: light;
+}
 
-  /* The one signal colour. Used sparingly: labels, active state, key numbers. */
-  --color-lime: #CCFF4D;
-  --color-lime-dim: #9DC431;
+[data-theme="dark"] {
+  --bg: #0f0f0d;
+  --surface: #171714;
+  --sunken: #0a0a09;
+  --ink: #f2efe6;
+  --ink-2: #bcb8ab;
+  --ink-3: #918e82;
+  --line: #2a2a25;
+  --line-2: #403f37;
+  --accent: #ff6a3d;
+  --accent-ink: #ff8a63;
+  --accent-wash: #ff6a3d1f;
+  color-scheme: dark;
+}
 
-  --font-display: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-body: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-wash: var(--accent-wash);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 @layer base {
   * {
-    border-color: var(--color-line);
+    border-color: var(--line);
   }
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 5.5rem;
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    background: var(--color-ink);
-    color: var(--color-paper);
-    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  h1, h2, h3, h4, h5 {
-    font-family: var(--font-display);
-    letter-spacing: -0.035em;
-    line-height: 1.05;
-    font-weight: 600;
+  h1, h2, h3 {
     text-wrap: balance;
   }
 
-  p { text-wrap: pretty; }
+  p {
+    text-wrap: pretty;
+  }
 
   ::selection {
-    background: var(--color-lime);
-    color: var(--color-ink);
+    background: var(--accent);
+    color: #fff;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-lime);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 3px;
   }
 
-  * { scrollbar-color: var(--color-line-2) transparent; }
-
-  ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: var(--color-ink); }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-line-2);
-    border-radius: 99px;
-    border: 3px solid var(--color-ink);
+  button {
+    cursor: pointer;
   }
-  ::-webkit-scrollbar-thumb:hover { background: var(--color-muted); }
 }
 
-@layer utilities {
-  .font-display { font-family: var(--font-display); }
-  .font-mono { font-family: var(--font-mono); }
+@layer components {
+  /* Serif display type. The italic cut carries the emphasis. */
+  .display {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+  }
+  .display em {
+    font-style: italic;
+    color: var(--accent);
+  }
 
-  /* Small uppercase mono label that sits above a section heading. */
-  .eyebrow {
+  /* Small uppercase mono label. */
+  .label {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-lime);
+    color: var(--ink-3);
   }
 
-  /* Faint blueprint grid. */
-  .grid-bg {
-    background-image:
-      linear-gradient(var(--color-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
-    background-size: 72px 72px;
+  .wrap {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .wrap { padding-inline: 2.5rem; }
   }
 
-  .mask-fade-y {
-    -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 76%, transparent);
-    mask-image: linear-gradient(180deg, transparent, #000 14%, #000 76%, transparent);
+  /* Text link with an underline that draws in from the left. */
+  .link {
+    background: linear-gradient(var(--accent), var(--accent)) 0 100% / 0 1px no-repeat,
+      linear-gradient(var(--line-2), var(--line-2)) 0 100% / 100% 1px no-repeat;
+    padding-bottom: 2px;
+    transition: background-size 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.2s;
+  }
+  .link:hover {
+    background-size: 100% 1px, 100% 1px;
+    color: var(--accent-ink);
   }
 
-  .glass {
-    background: color-mix(in oklab, var(--color-ink) 72%, transparent);
-    backdrop-filter: blur(16px) saturate(1.1);
-    -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.7rem 1.15rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    transition: transform 0.2s ease, background-color 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-solid {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .btn-solid:hover { background: var(--accent); color: #fff; }
+  .btn-line {
+    border: 1px solid var(--line-2);
+    color: var(--ink);
+  }
+  .btn-line:hover { border-color: var(--ink); }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.2rem 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--ink-2);
+    background: var(--surface);
   }
 
-  .noise::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  .kbd {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    border: 1px solid var(--line-2);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+    padding: 0.05rem 0.35rem;
+    color: var(--ink-3);
   }
+}
 
-  /* The pointer-following glow is a mouse-only flourish. */
-  .cursor-glow { display: none; }
-  @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    .cursor-glow { display: block; }
+/* ---------------------------------------------------------------
+   Scroll reveal, done in CSS with a view timeline. No script, so
+   content is never hidden if JavaScript fails, and browsers without
+   support simply show everything.
+   --------------------------------------------------------------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 42%;
+    }
   }
+}
+@keyframes reveal {
+  from { opacity: 0; translate: 0 22px; }
+  to { opacity: 1; translate: 0 0; }
+}
 
-  @keyframes marquee-x {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+/* Hero entrance, staggered with --i. */
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 90ms);
   }
-  .animate-marquee { animation: marquee-x 42s linear infinite; }
+}
+@keyframes rise {
+  from { opacity: 0; translate: 0 18px; }
+  to { opacity: 1; translate: 0 0; }
+}
 
-  @keyframes caret {
-    0%, 45% { opacity: 1; }
-    50%, 95% { opacity: 0; }
-  }
-  .animate-caret { animation: caret 1.05s steps(1) infinite; }
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 55%, transparent); }
+  60% { box-shadow: 0 0 0 7px transparent; }
+}
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent);
+  animation: pulse-dot 2.2s ease-out infinite;
+}
 
-  @keyframes float-slow {
-    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(0, -24px, 0) scale(1.05); }
-  }
-  .animate-float-slow { animation: float-slow 16s ease-in-out infinite; }
+/* ---------------------------------------------------------------
+   View transitions between the work grid and a case study.
+   --------------------------------------------------------------- */
+::view-transition-group(.morph) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+::view-transition-old(.fade-out) {
+  animation: 160ms ease-in both vt-fade reverse;
+}
+::view-transition-new(.fade-in) {
+  animation: 260ms ease-out 140ms both vt-fade;
+}
+@keyframes vt-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+/* ---------------------------------------------------------------
+   Résumé page prints as a clean one-pager.
+   --------------------------------------------------------------- */
+@media print {
+  @page { margin: 14mm 15mm; }
+  :root, [data-theme="dark"] {
+    --bg: #fff; --surface: #fff; --ink: #000; --ink-2: #222; --ink-3: #444;
+    --line: #bbb; --line-2: #999; --accent: #000; --accent-ink: #000;
+  }
+  .no-print { display: none !important; }
+  body { font-size: 10.5pt; }
+  a { text-decoration: none; }
 }
