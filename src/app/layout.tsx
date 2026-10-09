@@ -1,92 +1,91 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Nav from "@/components/Nav";
+import CommandPalette from "@/components/CommandPalette";
 import Footer from "@/components/Footer";
-import ScrollProgress from "@/components/ScrollProgress";
-import CursorGlow from "@/components/CursorGlow";
-import { site } from "@/lib/content";
+import Header from "@/components/Header";
+import { profile, siteUrl } from "@/content/site";
+import { themeScript } from "@/lib/theme";
 
-const geist = Geist({
-  variable: "--font-geist",
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
+const instrument = Instrument_Serif({
+  variable: "--font-instrument",
   subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
   display: "swap",
 });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
+const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: `${site.name}, Software Engineer`,
-    template: `%s · ${site.name}`,
+    default: `${profile.name}, ${profile.role}`,
+    template: `%s · ${profile.name}`,
   },
-  description: site.tagline,
-  keywords: [
-    "Software Engineer",
-    "Frontend Engineer",
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Full Stack Developer",
-    "Los Angeles",
-    "USC",
-  ],
-  authors: [{ name: site.name, url: site.url }],
+  description: profile.summary,
+  authors: [{ name: profile.name, url: siteUrl }],
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    url: site.url,
-    title: `${site.name}, Software Engineer`,
-    description: site.tagline,
-    siteName: site.name,
+    url: "/",
+    siteName: profile.name,
+    title: `${profile.name}, ${profile.role}`,
+    description: profile.summary,
   },
-  twitter: {
-    card: "summary_large_image",
-    title: `${site.name}, Software Engineer`,
-    description: site.tagline,
-  },
+  twitter: { card: "summary_large_image" },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f5f3ee" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f0f0d" },
+  ],
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  jobTitle: profile.role,
+  url: siteUrl,
+  email: `mailto:${profile.email}`,
+  address: { "@type": "PostalAddress", addressLocality: "Los Angeles", addressRegion: "CA" },
+  alumniOf: [
+    { "@type": "CollegeOrUniversity", name: "University of Southern California" },
+    { "@type": "CollegeOrUniversity", name: "Ghana Communication Technology University" },
+  ],
+  sameAs: [profile.github, profile.linkedin],
+};
+
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en">
+    // data-theme is rewritten by the inline script before paint, and browser
+    // extensions add attributes to <body>, so both opt out of the attribute diff.
+    <html
+      lang="en"
+      data-theme="light"
+      suppressHydrationWarning
+      className={`${inter.variable} ${instrument.variable} ${jetbrains.variable}`}
+    >
       <head>
-        {/* Motion sets the pre-animation state inline (opacity: 0), so without
-            JS the prerendered content would render invisible. */}
-        <noscript>
-          <style>{`[style*="opacity:0"], [style*="opacity: 0"] {
-            opacity: 1 !important;
-            transform: none !important;
-            filter: none !important;
-          }`}</style>
-        </noscript>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      {/* Extensions such as Grammarly inject attributes into <body> before React
-          hydrates, which trips the hydration mismatch warning. This suppresses the
-          attribute diff on this element only, one level deep, not the subtree. */}
-      <body
-        suppressHydrationWarning
-        className={`${geist.variable} ${geistMono.variable} antialiased`}
-      >
+      <body suppressHydrationWarning>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[70] focus:rounded-full focus:bg-lime focus:px-5 focus:py-2 focus:font-display focus:text-sm focus:text-ink"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-bg"
         >
           Skip to content
         </a>
-        <ScrollProgress />
-        <CursorGlow />
-        <Nav />
-        <main id="main" className="relative z-10">
-          {children}
-        </main>
+        <Header />
+        <main id="main">{children}</main>
         <Footer />
+        <CommandPalette />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c") }}
+        />
       </body>
     </html>
   );
