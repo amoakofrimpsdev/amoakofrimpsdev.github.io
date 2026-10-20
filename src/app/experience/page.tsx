@@ -109,7 +109,7 @@ export default function ExperiencePage() {
                 What I <em>work with.</em>
               </>
             }
-            lead="Weighted toward the front end, but I write everything from the browser down to the database."
+            lead="Most of my work is in services, data, and the tests around them. I pick up whatever layer the problem sits in."
           />
           <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
             {toolkit.map((g) => (

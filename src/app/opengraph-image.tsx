@@ -27,11 +27,11 @@ export default function OpengraphImage() {
         <div style={{ display: "flex", flexDirection: "column", fontFamily: "serif", fontSize: 112, lineHeight: 1, letterSpacing: -3 }}>
           <div>{profile.name}</div>
           <div style={{ display: "flex", marginTop: 14, fontSize: 64, color: "#47453c", letterSpacing: -1 }}>
-            builds web software&nbsp;<span style={{ color: "#e8431a", fontStyle: "italic" }}>end to end.</span>
+            builds software that&nbsp;<span style={{ color: "#e8431a", fontStyle: "italic" }}>holds up.</span>
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 26, color: "#47453c" }}>
-          <div>React · TypeScript · Node.js</div>
+          <div>TypeScript · Python · C# · C++</div>
           <div>MS Computer Science, USC</div>
         </div>
       </div>

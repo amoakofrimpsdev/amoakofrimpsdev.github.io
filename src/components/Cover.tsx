@@ -186,6 +186,45 @@ function CoursePilot() {
   );
 }
 
+function Rcw() {
+  const rows = [
+    { t: "📸 TODAY: SUNDAY SERVICE", w: [210, 150] },
+    { t: "📤 UPLOADS", w: [240, 200, 170] },
+    { t: "⏰ STILL TO UPLOAD", w: [120] },
+  ];
+  // Stack the three chat bubbles, each sized to its line count.
+  const tops = rows.reduce<number[]>((acc, r, i) => [...acc, i ? acc[i - 1] + 34 + rows[i - 1].w.length * 16 + 14 : 100], []);
+  return (
+    <>
+      <rect x="64" y="44" width="250" height="312" rx="26" fill="var(--surface)" stroke="var(--line-2)" />
+      <text x="88" y="84" style={mono} fill="var(--ink-3)">UPLOAD</text>
+      {["Baptism", "Preacher", "Videos"].map((c, i) => (
+        <g key={c}>
+          <rect x={88 + i * 70} y="100" width="62" height="26" rx="13" fill={i === 0 ? "var(--ink)" : "var(--sunken)"} />
+        </g>
+      ))}
+      <rect x="88" y="146" width="202" height="150" rx="14" fill="none" stroke="var(--line-2)" strokeDasharray="6 6" />
+      <circle cx="189" cy="206" r="20" fill="var(--accent)" />
+      <path d="M181 206h16M189 198v16" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
+      <rect x="138" y="244" width="102" height="8" rx="4" fill="var(--line-2)" />
+      <text x="356" y="84" style={mono} fill="var(--ink-3)">TEAM GROUP</text>
+      {rows.map((r, i) => {
+        const top = tops[i];
+        const h = 34 + r.w.length * 16;
+        return (
+          <g key={r.t}>
+            <rect x="356" y={top} width="224" height={h} rx="12" fill="var(--surface)" stroke="var(--line)" />
+            <text x="372" y={top + 22} style={{ ...mono, fontSize: 9.5 }} fill="var(--accent-ink)">{r.t}</text>
+            {r.w.map((w, j) => (
+              <rect key={j} x="372" y={top + 32 + j * 16} width={Math.min(w, 190)} height="7" rx="3.5" fill="var(--line-2)" />
+            ))}
+          </g>
+        );
+      })}
+    </>
+  );
+}
+
 function Jobhunt() {
   const rows = [
     { score: 91, w: 230, chips: [84, 58, 96], top: true },
@@ -238,6 +277,7 @@ function Jobhunt() {
 
 const art: Record<DemoKind, () => React.ReactElement> = {
   jobhunt: Jobhunt,
+  rcw: Rcw,
   portal: Portal,
   acc: Acc,
   jute: Jute,

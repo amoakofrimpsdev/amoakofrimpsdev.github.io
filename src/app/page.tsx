@@ -27,7 +27,7 @@ export default function Home() {
             className="rise display mt-7 max-w-[18ch] text-[clamp(2.7rem,7.6vw,6.75rem)]"
             style={{ "--i": 1 } as React.CSSProperties}
           >
-            Daniel Amoako Frimpong builds web software <em>end to end.</em>
+            Daniel Amoako Frimpong builds software that <em>holds up.</em>
           </h1>
 
           <div className="mt-9 grid gap-8 md:grid-cols-[minmax(0,34rem)_1fr] md:items-end">
@@ -94,7 +94,7 @@ export default function Home() {
                 Projects with <em>something to try.</em>
               </>
             }
-            lead="Every case study has a working demo of the core idea or the real data behind it. Here are three of the six."
+            lead="Every case study has a working demo of the core idea or the real data behind it. Here are three of the seven."
           />
           <div className="grid gap-5 md:grid-cols-2 md:gap-6">
             <WorkCard study={lead} wide />
@@ -104,7 +104,7 @@ export default function Home() {
           </div>
           <div className="reveal mt-10">
             <Link href="/work" className="btn btn-line">
-              All six projects <ArrowRight />
+              All seven projects <ArrowRight />
             </Link>
           </div>
         </section>
