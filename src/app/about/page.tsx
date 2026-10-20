@@ -41,14 +41,19 @@ export default function AboutPage() {
               </h1>
               <div className="reveal mt-8 max-w-2xl space-y-5 text-lg leading-relaxed text-ink-2">
                 <p>
-                  I started out teaching. For four years I ran robotics training with Coderina, working with
+                  I started out teaching. As Head Robotics Trainer at Coderina, I worked with
                   students from 50 high schools across 5 regions of Ghana on VEX, LEGO EV3, and Arduino kits.
                 </p>
                 <p>
-                  I was building web applications the whole time. Cadi Media took me on as a part-time co-op
-                  developer in 2020 and I stayed four years, shipping React and Angular front ends with Node
-                  and Express behind them. Then I moved to Los Angeles for a Master&apos;s in Computer Science
+                  I was writing production code the whole time. Cadi Media took me on as a part-time co-op
+                  developer in 2020 and I stayed four years, building client applications and the APIs, data
+                  pipelines, and databases behind them. Then I moved to Los Angeles for a Master&apos;s in Computer Science
                   at USC, which I completed in May 2026.
+                </p>
+                <p>
+                  Today most of my work is systems: the ingestion engine and scoring rules behind Jobhunt, the
+                  access rules and scheduled jobs behind RCW Media, and the review and test pipeline for a
+                  10-person team at Easley-Dunn.
                 </p>
                 <p>
                   Teaching shaped how I write code. If a room of beginners cannot follow an explanation, the

@@ -8,7 +8,7 @@ import { moreProjects } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Six case studies, each with a working demo or the real data, plus smaller projects and a research paper.",
+  description: "Seven case studies, each with a working demo or the real data, plus smaller projects and a research paper.",
   alternates: { canonical: "/work" },
 };
 
@@ -25,7 +25,7 @@ export default function WorkPage() {
             label="Selected work"
             title={
               <>
-                Six projects, each with <em>something to try.</em>
+                Seven projects, each with <em>something to try.</em>
               </>
             }
             lead="Every case study has a working demo of the core idea or the real data behind it, plus a short account of the problem and what I did about it."

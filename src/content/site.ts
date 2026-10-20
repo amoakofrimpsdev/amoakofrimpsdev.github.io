@@ -22,14 +22,14 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/danielfrimps/",
   instagram: "https://www.instagram.com/bits.by.anda/",
   summary:
-    "Software engineer in Los Angeles. I build web applications end to end, with React and TypeScript in front and Node and Express behind. MS in Computer Science from USC.",
+    "Software engineer in Los Angeles. I build systems that hold up in production: data ingestion, access control, background jobs, and the tests that keep them correct. MS in Computer Science from USC.",
   intro:
-    "React and TypeScript in front, Node and Express behind. I hold an MS in Computer Science from USC, and I currently lead a 10-person team building a Unity and C# game at Easley-Dunn Productions.",
+    "I lead a 10-person team building a Unity and C# game at Easley-Dunn Productions, and I build production systems of my own: a job search engine that reads 2,500 employer boards, and a media platform my church runs on. MS in Computer Science, USC.",
 };
 
 export const facts = [
-  { label: "Now", value: "Software Engineer Intern", detail: "Easley-Dunn Productions" },
-  { label: "Before", value: "Web Application Developer", detail: "Cadi Media, 2020 to 2024" },
+  { label: "Now", value: "Software Engineer Intern", detail: "Leading a 10-person team, Easley-Dunn" },
+  { label: "Building", value: "Jobhunt and RCW Media", detail: "Both in real use" },
   { label: "Education", value: "MS Computer Science", detail: "USC, May 2026" },
 ];
 
@@ -40,9 +40,9 @@ export const receipts = [
     source: "Easley-Dunn",
   },
   {
-    value: "~350",
-    label: "parents using the school grade portal in its first year",
-    source: "Cadi Media",
+    value: "~30x",
+    label: "faster dashboard queries, found by a load test with two years of data",
+    source: "RCW Media",
   },
   {
     value: "30 → 60",
@@ -50,9 +50,9 @@ export const receipts = [
     source: "Prime Engine",
   },
   {
-    value: "0.947",
-    label: "macro F1 across 17 pest species, best of five backbones",
-    source: "Jute classifier",
+    value: "~2,500",
+    label: "employer job boards read incrementally, across 12 providers",
+    source: "Jobhunt",
   },
 ];
 
@@ -93,12 +93,12 @@ export const roles: Role[] = [
     start: "Jun 2020",
     end: "Apr 2024",
     points: [
-      "Built and deployed client web applications end to end on MERN (React) and MEAN (Angular) stacks, improving average page load times by an estimated 30 to 40%.",
-      "Shipped a secure parent portal with a React front end, a Node and Express API, JWT authentication, and SSL, from requirements through production launch. Roughly 350 parents across two schools used it in its first year.",
-      "Engineered RESTful APIs with Node and Express against SQL and NoSQL (MongoDB) databases, and designed ETL pipelines that kept data consistent across concurrent client applications.",
+      "Designed and shipped an authenticated grade portal for two schools: a Node and Express API with JWT authentication and SSL, taken from requirements through production launch. Roughly 350 parents used it in its first year.",
+      "Engineered RESTful APIs and backend services against SQL and NoSQL (MongoDB) databases, and designed ETL pipelines that kept data consistent across concurrent client applications.",
+      "Built and deployed client applications on MERN and MEAN stacks, improving average page load times by an estimated 30 to 40%.",
       "Wrote and maintained unit tests across a portfolio of client applications, and worked directly with clients and non-technical staff to triage issues and ship fixes on a regular cadence.",
     ],
-    stack: ["React", "Angular", "TypeScript", "Node.js", "Express", "MongoDB", "JWT"],
+    stack: ["Node.js", "Express", "TypeScript", "MongoDB", "SQL", "JWT", "React", "Angular"],
   },
   {
     title: "STEM Facilitator",
@@ -108,18 +108,18 @@ export const roles: Role[] = [
     start: "Oct 2022",
     end: "Jan 2024",
     points: [
-      "Built the Makersplace admin dashboard in React, Node, and MongoDB so non-technical staff could update the site themselves. A content update went from over 3 hours to under 50 minutes.",
+      "Built an internal admin tool on Node, MongoDB, and React so non-technical staff could manage site content themselves. A content update went from over 3 hours to under 50 minutes.",
       "Trained 15 students on TinyML for smart agriculture with Raspberry Pi Pico and Edge Impulse. Their crop yield prototypes reached 95% model accuracy.",
     ],
-    stack: ["React", "Node.js", "MongoDB", "TinyML"],
+    stack: ["Node.js", "MongoDB", "TinyML", "Edge Impulse"],
   },
 ];
 
 export const teaching = [
   {
-    title: "Lead Robotics Trainer",
+    title: "Head Robotics Trainer",
     org: "Coderina EdTech Foundation",
-    dates: "2020 to 2024",
+    dates: "2022 to 2024",
     note: "Taught robotics, programming, and embedded systems to students from 50 high schools across 5 regions of Ghana. Teams I mentored finished top 5 at the national competition three years running.",
   },
   {
@@ -163,28 +163,49 @@ export const education = [
 
 export const toolkit = [
   {
-    title: "Frontend",
-    note: "Where I spend most of my time",
-    items: ["React", "Next.js", "TypeScript", "Angular", "Tailwind CSS", "Accessible, responsive UI"],
-  },
-  {
-    title: "Backend",
-    note: "APIs and data",
-    items: ["Node.js", "Express", "REST APIs", "JWT auth", "PostgreSQL / PostGIS", "MongoDB and SQLite"],
-  },
-  {
     title: "Languages",
     note: "Strongest first",
-    items: ["TypeScript / JavaScript", "Python", "C#", "C++", "Java", "SQL"],
+    items: ["TypeScript / JavaScript", "Python", "C#", "C++", "Java", "SQL", "Go (learning)"],
   },
   {
-    title: "Delivery",
-    note: "Getting it to production",
-    items: ["Git and pull request review", "CI/CD", "Docker", "AWS and Azure", "Jest and PyTest", "Agile sprints"],
+    title: "Systems and data",
+    note: "Services, storage, access",
+    items: [
+      "Node.js and Express services",
+      "REST APIs and auth (JWT, OAuth)",
+      "PostgreSQL, Row Level Security, query plans",
+      "SQLite, MongoDB, PostGIS",
+      "Background jobs and ETL pipelines",
+      "Supabase, Google and Telegram APIs",
+    ],
+  },
+  {
+    title: "Testing and delivery",
+    note: "Keeping it correct",
+    items: [
+      "Unit, integration, end-to-end, load tests",
+      "Vitest, Playwright, Node test runner, PyTest",
+      "CI with GitHub Actions",
+      "Code review (31 of a team's 34 merged PRs)",
+      "Docker, Vercel, AWS, Azure",
+      "Claude Code and GitHub Copilot",
+    ],
+  },
+  {
+    title: "Also",
+    note: "When the project needs it",
+    items: ["Unity and game systems", "React, Next.js, Angular", "Tauri desktop apps", "TensorFlow and OpenCV", "Controls and formal specs (STL)", "Embedded: Arduino, Raspberry Pi"],
   },
 ];
 
 export const moreProjects = [
+  {
+    title: "Follow Up",
+    blurb:
+      "An installable web app for following up after Bible study invitations. Tap a color for how someone came across, and it drafts a message in their communication style, 20 tones in all, to send from your own phone. Contacts stay on the device, with no server to breach.",
+    stack: ["Next.js", "TypeScript", "PWA"],
+    links: [{ label: "GitHub", href: "https://github.com/amoakofrimpsdev/Follow-up-app" }],
+  },
   {
     title: "Weather Application",
     blurb:

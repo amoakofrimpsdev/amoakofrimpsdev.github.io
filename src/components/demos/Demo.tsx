@@ -5,9 +5,12 @@ import JuteChart from "./JuteChart";
 import MatchScore from "./MatchScore";
 import PortalFlow from "./PortalFlow";
 import PrimeDemo from "./PrimeDemo";
+import ServiceDay from "./ServiceDay";
 
 export default function Demo({ kind }: { kind: DemoKind }) {
   switch (kind) {
+    case "rcw":
+      return <ServiceDay />;
     case "jobhunt":
       return <MatchScore />;
     case "acc":
