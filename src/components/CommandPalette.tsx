@@ -44,6 +44,7 @@ export default function CommandPalette() {
       { id: "mail", group: "Links", label: "Send an email", run: () => (window.location.href = `mailto:${profile.email}`) },
       { id: "gh", group: "Links", label: "GitHub", run: out(profile.github) },
       { id: "li", group: "Links", label: "LinkedIn", run: out(profile.linkedin) },
+      { id: "photo", group: "Links", label: "Photography", hint: "bits.by.anda", run: out(profile.photography) },
     ];
   }, [router]);
 

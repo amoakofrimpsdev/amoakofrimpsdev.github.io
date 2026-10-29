@@ -12,6 +12,7 @@ export default function Footer() {
           <Link href="/resume" className="hover:text-ink">Résumé</Link>
           <a href={profile.github} target="_blank" rel="noopener noreferrer" className="hover:text-ink">GitHub</a>
           <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-ink">LinkedIn</a>
+          <a href={profile.photography} target="_blank" rel="noopener noreferrer" className="hover:text-ink">Photography</a>
           <a href={`mailto:${profile.email}`} className="hover:text-ink">Email</a>
         </nav>
       </div>
