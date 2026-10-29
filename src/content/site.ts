@@ -21,6 +21,7 @@ export const profile = {
   github: "https://github.com/amoakofrimpsdev",
   linkedin: "https://www.linkedin.com/in/danielfrimps/",
   instagram: "https://www.instagram.com/bits.by.anda/",
+  photography: "https://daniel-photography-gilt.vercel.app",
   summary:
     "Software engineer in Los Angeles. I build systems that hold up in production: data ingestion, access control, background jobs, and the tests that keep them correct. MS in Computer Science from USC.",
   intro:
@@ -28,7 +29,7 @@ export const profile = {
 };
 
 export const facts = [
-  { label: "Now", value: "Software Engineer Intern", detail: "Leading a 10-person team, Easley-Dunn" },
+  { label: "Now", value: "Software Engineer", detail: "Leading a 10-person team, Easley-Dunn" },
   { label: "Building", value: "Jobhunt and RCW Media", detail: "Both in real use" },
   { label: "Education", value: "MS Computer Science", detail: "USC, May 2026" },
 ];
@@ -70,7 +71,7 @@ export type Role = {
 
 export const roles: Role[] = [
   {
-    title: "Software Engineer Intern",
+    title: "Software Engineer",
     org: "Easley-Dunn Productions, Inc.",
     place: "Remote",
     start: "Jun 2026",
@@ -198,7 +199,25 @@ export const toolkit = [
   },
 ];
 
+export const photography = {
+  blurb:
+    "I shoot landscapes, travel, street, and events, and I lead the media team at my church. My photography site has 348 frames, sorted by the light they were shot in.",
+  frames: [
+    { src: "/images/photography/sierra-024.jpg", alt: "A blue alpine lake framed by two bare, weathered trees, with mountains behind", place: "Eastern Sierra" },
+    { src: "/images/photography/venice-016.jpg", alt: "Waves breaking on rocks at sunset, with gulls overhead", place: "Venice, Los Angeles" },
+    { src: "/images/photography/sf-tour-008.jpg", alt: "Two people walking through a long tunnel toward bright daylight", place: "San Francisco" },
+    { src: "/images/photography/venice-029.jpg", alt: "A crowd on the Venice boardwalk at golden hour, under palm trees", place: "Venice, Los Angeles" },
+  ],
+};
+
 export const moreProjects = [
+  {
+    title: "Photography portfolio site",
+    blurb:
+      "My photography site, in plain HTML, CSS, and JavaScript with no framework. A Python pipeline turns the originals into web sizes and the gallery data. The landing page changes colour with the light of the day, and its text colour is picked from the background's luminance, so contrast never drops below 4.87 to 1.",
+    stack: ["HTML", "CSS", "JavaScript", "Python"],
+    links: [{ label: "Live site", href: "https://daniel-photography-gilt.vercel.app" }],
+  },
   {
     title: "Follow Up",
     blurb:

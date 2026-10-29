@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ViewTransition } from "react";
-import { education, profile } from "@/content/site";
+import { ArrowUpRight } from "@/components/icons";
+import { education, photography, profile } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -26,7 +27,11 @@ export default function AboutPage() {
                 className="aspect-[4/5] w-full rounded-2xl border border-line object-cover object-[50%_30%]"
               />
               <p className="mt-3 text-sm text-ink-3">
-                Also a photographer. I lead a church media team and post as{" "}
+                Also a photographer.{" "}
+                <a href={profile.photography} target="_blank" rel="noopener noreferrer" className="link text-ink-2">
+                  See my photography
+                </a>
+                , or follow{" "}
                 <a href={profile.instagram} target="_blank" rel="noopener noreferrer" className="link text-ink-2">
                   @bits.by.anda
                 </a>
@@ -73,6 +78,47 @@ export default function AboutPage() {
                 ))}
               </ul>
             </div>
+          </div>
+        </section>
+
+        <section className="border-t border-line bg-surface">
+          <div className="wrap py-24 md:py-28">
+            <div className="reveal grid gap-6 md:grid-cols-[1fr_minmax(0,26rem)] md:items-end md:gap-12">
+              <div>
+                <div className="label">Photography</div>
+                <h2 className="display mt-4 text-[clamp(2.4rem,5.6vw,4.5rem)]">
+                  Also behind <em>a camera.</em>
+                </h2>
+              </div>
+              <p className="text-lg leading-relaxed text-ink-2 md:pb-2">{photography.blurb}</p>
+            </div>
+
+            <ul className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+              {photography.frames.map((f) => (
+                <li key={f.src} className="reveal">
+                  <figure>
+                    <Image
+                      src={f.src}
+                      alt={f.alt}
+                      width={900}
+                      height={600}
+                      sizes="(min-width: 768px) 25vw, 50vw"
+                      className="aspect-[4/5] w-full rounded-xl border border-line object-cover"
+                    />
+                    <figcaption className="label mt-2.5">{f.place}</figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={profile.photography}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="reveal btn btn-line mt-10"
+            >
+              See the full photography site <ArrowUpRight />
+            </a>
           </div>
         </section>
       </div>
